@@ -19,6 +19,8 @@ def run():
     didSquat = True
     serv = True
     status = ""
+    sets = 0
+    setGoal = 30
     while True:
         # Read the frame
         _, img = cap.read()
@@ -57,19 +59,24 @@ def run():
             didSquat = False
             status = "UP"
 
-        cv2.putText(img, "count: " + str(counter), (400, 400),
-                    cv2.FONT_HERSHEY_SIMPLEX, 1, thickness=3, color=[255, 255, 255])
-        cv2.putText(img, "status: " + str(status), (400, 440),
-                    cv2.FONT_HERSHEY_SIMPLEX, 1, thickness=3, color=[255, 255, 255])
+        # cv2.putText(img, "count: " + str(counter), (400, 400),
+        #             cv2.FONT_HERSHEY_SIMPLEX, 1, thickness=3, color=[255, 255, 255])
+        # cv2.putText(img, "status: " + str(status), (400, 440),
+        #             cv2.FONT_HERSHEY_SIMPLEX, 1, thickness=3, color=[255, 255, 255])
         if serv:
             try:
                 r = requests.post("http://127.0.0.1:5000/info",
-                                  data=json.dumps({"counter": str(counter), "status": status}))
+                                  data=json.dumps({"counter": str(counter), "status": status, "set": setGoal}))
             except:
                 serv = False
                 pass
         # Display
-
+        if counter == setGoal:
+            counter = 0
+            sets += 1
+            setGoal -= 1
+        if setGoal == 0:
+            setGoal = "success!"
         cv2.imshow('img', img)
 
         # Stop if escape key is pressed

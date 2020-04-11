@@ -37,6 +37,7 @@ class App extends Component {
         this.setState({
           Count: responseData.counter,
           Position: responseData.status,
+          set: responseData.set,
         });
         console.log(responseData);
       })
