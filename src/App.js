@@ -44,11 +44,21 @@ class App extends Component {
         console.error(error);
       });
   }
+  async start() {
+    fetch("http://127.0.0.1:5000/start", { method: "POST" })
+      .then((response) => response.json())
+      .then((responseData) => {
+        console.log(responseData);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }
   render(props) {
     return (
       <div>
         <Navbar dark color="dark">
-          <NavbarBrand href="/"> Squat</NavbarBrand>
+          <NavbarBrand href="/"> Ssquat</NavbarBrand>
         </Navbar>
         <Row>
           <Col xs={9} className="main"></Col>
@@ -78,7 +88,7 @@ class App extends Component {
               </h1>
             </Col>
             <Col className="centered">
-              <Button className="but" color="primary" onClick={this.submit}>
+              <Button className="but" color="primary" onClick={this.start}>
                 Start!
               </Button>
             </Col>

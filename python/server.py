@@ -1,6 +1,7 @@
 from flask import Flask, request
 from flask_cors import CORS
 import json
+from detect import run as camera
 
 app = Flask(__name__)
 CORS(app)
@@ -24,6 +25,13 @@ def handle_post():
     res = {"status": "OK"}
     value.value = req
 
+    return json.dumps(res)
+
+
+@app.route("/start", methods=["POST"])
+def handle_start():
+    res = {"status": "OK"}
+    camera()
     return json.dumps(res)
 
 

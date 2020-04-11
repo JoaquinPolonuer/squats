@@ -1,7 +1,10 @@
+from flask import Flask, request
+from flask_cors import CORS
 import requests
 import cv2
 import json
 # Load the cascade
+app = Flask(__name__)
 
 
 def run():
@@ -84,3 +87,21 @@ def run():
 
     # Release the VideoCapture object
     cap.release()
+
+
+app = Flask(_name_)
+
+
+@app.route("/start", methods=['POST'])
+def start():
+    run()
+    return "Hello, World!"
+
+
+@app.route("/test", methods=['GET', 'POST'])
+def test():
+    return "Holaaaaa"
+
+
+if _name_ == "_main_":
+    app.run(debug=True)

@@ -31,7 +31,8 @@
     "react-eject": "react-scripts eject",
     "electron-build": "electron-builder",
     "build": "npm run react-build && npm run electron-build",
-    "start": "concurrently \"cross-env BROWSER=none npm run react-start\" \"wait-on http://localhost:3000 && electron .\" \"py python/detect.py\""
+    "start": "concurrently \"py python/server.py\" \"cross-env BROWSER=none npm run react-start\" \"wait-on http://localhost:3000 && electron .\"  \"py python/detect.py\"",
+    "devMode": "concurrently \"py python/server.py\" \"cross-env BROWSER=none npm run react-start\" \"wait-on http://localhost:3000 && electron .\""
   },
   "eslintConfig": {
     "extends": "react-app"
